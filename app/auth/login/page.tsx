@@ -34,20 +34,33 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800 flex items-center justify-center p-6">
+    <div
+      className="min-h-screen flex items-center justify-center p-6"
+      style={{ background: 'linear-gradient(160deg, #1c1917 0%, #292524 55%, #3c1a0a 100%)' }}
+    >
       <div className="w-full max-w-sm animate-fade-in">
 
         {/* Logo */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur rounded-2xl mb-5 ring-1 ring-white/20">
-            <Sparkles className="w-8 h-8 text-white" />
+          <div
+            className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5"
+            style={{
+              background: 'linear-gradient(135deg, #f59e0b, #ea580c)',
+              boxShadow: '0 8px 24px rgba(245,158,11,0.4)',
+            }}
+          >
+            <Sparkles className="w-7 h-7 text-white" />
           </div>
-          <h1 className="font-display text-3xl font-bold text-white">SocialMind</h1>
-          <p className="text-white/60 text-sm mt-2">Sua operação inteligente de social media</p>
+          <h1 className="font-display text-2xl font-extrabold" style={{ color: '#fef3c7' }}>
+            SocialMind
+          </h1>
+          <p className="text-sm mt-1.5" style={{ color: 'rgba(254,243,199,0.5)' }}>
+            Sua operação inteligente de social media
+          </p>
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-3xl p-6 shadow-2xl shadow-brand-950/50">
+        <div className="bg-white rounded-2xl p-6" style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.3)' }}>
           <div className="space-y-4">
             <div>
               <label className="label">Email</label>

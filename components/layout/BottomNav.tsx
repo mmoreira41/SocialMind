@@ -23,11 +23,11 @@ export default function BottomNav() {
               key={href}
               href={href}
               className={`flex flex-col items-center gap-1 py-3 px-6 min-w-0 transition-colors ${
-                active ? 'text-brand-600' : 'text-surface-400 hover:text-surface-600'
+                active ? 'text-orange-600' : 'text-surface-300 hover:text-surface-500'
               }`}
             >
               <Icon className={`w-6 h-6 ${active ? 'stroke-[2.5]' : ''}`} />
-              <span className="text-xs font-medium">{label}</span>
+              <span className={`text-xs font-medium ${active ? 'font-bold' : ''}`}>{label}</span>
             </Link>
           )
         })}

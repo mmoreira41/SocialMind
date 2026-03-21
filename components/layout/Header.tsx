@@ -18,14 +18,14 @@ export default function Header({ title, subtitle, action, showBack }: HeaderProp
       {showBack && (
         <button
           onClick={() => router.back()}
-          className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-100 active:bg-surface-200 transition-colors flex-shrink-0"
+          className="w-9 h-9 flex items-center justify-center rounded-xl border border-surface-100 bg-white hover:bg-surface-50 active:bg-surface-100 transition-colors flex-shrink-0"
         >
-          <ArrowLeft className="w-5 h-5 text-surface-600" />
+          <ArrowLeft className="w-4 h-4 text-surface-500" />
         </button>
       )}
       <div className="flex-1 min-w-0">
-        <h1 className="font-display font-bold text-xl text-surface-900 truncate">{title}</h1>
-        {subtitle && <p className="text-sm text-surface-500 truncate">{subtitle}</p>}
+        <h1 className="font-display font-extrabold text-xl text-surface-900 truncate">{title}</h1>
+        {subtitle && <p className="text-xs text-surface-400 truncate mt-0.5">{subtitle}</p>}
       </div>
       {action && <div className="flex-shrink-0">{action}</div>}
     </header>

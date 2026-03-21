@@ -5,6 +5,22 @@ import Link from 'next/link'
 import Header from '@/components/layout/Header'
 import { Plus, ChevronRight, Search } from 'lucide-react'
 
+const AVATAR_COLORS = [
+  'bg-gradient-to-br from-rose-400 to-rose-600',
+  'bg-gradient-to-br from-orange-400 to-orange-600',
+  'bg-gradient-to-br from-amber-400 to-amber-600',
+  'bg-gradient-to-br from-emerald-400 to-emerald-600',
+  'bg-gradient-to-br from-cyan-400 to-cyan-600',
+  'bg-gradient-to-br from-blue-400 to-blue-600',
+  'bg-gradient-to-br from-violet-400 to-violet-600',
+  'bg-gradient-to-br from-pink-400 to-pink-600',
+]
+
+function avatarColor(name: string): string {
+  const code = name.charCodeAt(0) + (name.charCodeAt(name.length - 1) ?? 0)
+  return AVATAR_COLORS[code % AVATAR_COLORS.length]
+}
+
 export default async function ClientsPage({
   searchParams,
 }: {
@@ -65,16 +81,16 @@ export default async function ClientsPage({
               href={`/clients/${client.id}`}
               className="card-hover p-4 flex items-center gap-3"
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-brand-400 to-brand-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-lg">
+              <div className={`w-11 h-11 ${avatarColor(client.name)} rounded-xl flex items-center justify-center flex-shrink-0`}>
+                <span className="text-white font-display font-extrabold text-base">
                   {client.name.charAt(0).toUpperCase()}
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-surface-900 truncate">{client.name}</p>
-                <p className="text-sm text-surface-500 truncate">{client.niche}</p>
+                <p className="font-display font-semibold text-surface-900 truncate">{client.name}</p>
+                <p className="text-sm text-surface-400 truncate">{client.niche}</p>
                 {client.instagram_handle && (
-                  <p className="text-xs text-brand-500 truncate">@{client.instagram_handle}</p>
+                  <p className="text-xs text-orange-500 truncate font-medium">@{client.instagram_handle}</p>
                 )}
               </div>
               <ChevronRight className="w-4 h-4 text-surface-300 flex-shrink-0" />
@@ -83,7 +99,7 @@ export default async function ClientsPage({
         </div>
       ) : (
         <div className="text-center py-16">
-          <p className="text-surface-500 text-sm">
+          <p className="text-surface-400 text-sm">
             {query ? `Nenhum cliente encontrado para "${query}"` : 'Nenhum cliente cadastrado'}
           </p>
           {!query && (

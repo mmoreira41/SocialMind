@@ -34,12 +34,15 @@ export interface ClientProfile {
 }
 
 export interface ContentIdea {
+  id: string
   week: number
   title: string
-  format: string
-  platform: string
+  format: 'reels' | 'carrossel' | 'estático' | 'stories'
+  platform: 'instagram' | 'tiktok' | 'linkedin' | 'todos'
   hook: string
-  objective: string
+  objective: 'engajamento' | 'conversão' | 'autoridade' | 'humanização' | 'alcance'
+  why_it_works?: string
+  status: 'draft' | 'approved'
 }
 
 export interface ContentPlan {

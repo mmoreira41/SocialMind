@@ -11,15 +11,12 @@ import Header from '@/components/layout/Header'
 import { Loader2, ChevronRight, ChevronLeft, Sparkles } from 'lucide-react'
 
 interface FormData {
-  // Etapa 1
   name: string
   niche: string
   instagram_handle: string
-  // Etapa 2
   target_audience: string
   products_services: string
   objectives: string
-  // Etapa 3
   reference_brands: string
   avoid: string
   extra_context: string
@@ -37,6 +34,8 @@ const NICHES = [
   'Pets', 'Turismo e viagem', 'Finanças e investimentos',
   'Arte e cultura', 'Varejo local', 'Serviços profissionais', 'Outro',
 ]
+
+const STEP_LABELS = ['Básico', 'Público', 'Referências']
 
 export default function NewClientPage() {
   const [step, setStep]       = useState(1)
@@ -61,7 +60,6 @@ export default function NewClientPage() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) throw new Error('Não autenticado')
 
-      // 1. Cria o cliente
       const { data: client, error: clientError } = await supabase
         .from('clients')
         .insert({
@@ -75,7 +73,6 @@ export default function NewClientPage() {
 
       if (clientError) throw clientError
 
-      // 2. Monta briefing e chama API de geração de perfil
       const briefing = `
 PÚBLICO-ALVO: ${form.target_audience}
 PRODUTOS/SERVIÇOS: ${form.products_services}
@@ -109,28 +106,38 @@ CONTEXTO ADICIONAL: ${form.extra_context || 'Não informado'}
     <div className="page-container">
       <Header title="Novo Cliente" showBack />
 
-      {/* Progress */}
+      {/* Progress steps */}
       <div className="flex items-center gap-2 mb-8">
         {[1, 2, 3].map(n => (
           <div key={n} className="flex items-center gap-2 flex-1">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
-              n < step  ? 'bg-brand-600 text-white' :
-              n === step ? 'bg-brand-600 text-white ring-4 ring-brand-100' :
-              'bg-surface-200 text-surface-400'
-            }`}>
+            <div
+              className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold font-display transition-all flex-shrink-0"
+              style={
+                n < step
+                  ? { background: 'linear-gradient(135deg, #f59e0b, #ea580c)', color: 'white' }
+                  : n === step
+                  ? { background: 'linear-gradient(135deg, #f59e0b, #ea580c)', color: 'white', boxShadow: '0 0 0 4px #fed7aa' }
+                  : { background: '#f0ede8', color: '#a8a29e' }
+              }
+            >
               {n < step ? '✓' : n}
             </div>
-            {n < 3 && <div className={`flex-1 h-0.5 rounded transition-all ${n < step ? 'bg-brand-600' : 'bg-surface-200'}`} />}
+            {n < 3 && (
+              <div
+                className="flex-1 h-0.5 rounded transition-all"
+                style={{ background: n < step ? '#f59e0b' : '#f0ede8' }}
+              />
+            )}
           </div>
         ))}
       </div>
 
-      {/* Etapa 1 — Informações básicas */}
+      {/* Etapa 1 */}
       {step === 1 && (
         <div className="space-y-4 animate-fade-in">
           <div>
-            <p className="font-display font-bold text-lg text-surface-900 mb-1">Informações básicas</p>
-            <p className="text-sm text-surface-500">Qual o nome da marca e em que área atua?</p>
+            <p className="font-display font-extrabold text-lg text-surface-900 mb-1">Informações básicas</p>
+            <p className="text-sm text-surface-400">Qual o nome da marca e em que área atua?</p>
           </div>
 
           <div>
@@ -147,7 +154,9 @@ CONTEXTO ADICIONAL: ${form.extra_context || 'Não informado'}
           </div>
 
           <div>
-            <label className="label">Instagram <span className="text-surface-400 font-normal">(opcional)</span></label>
+            <label className="label">
+              Instagram <span className="text-surface-300 font-normal normal-case tracking-normal">(opcional)</span>
+            </label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-surface-400 text-sm">@</span>
               <input className="input pl-7" placeholder="nomedapagina" value={form.instagram_handle} onChange={update('instagram_handle')} autoCapitalize="none" />
@@ -156,19 +165,19 @@ CONTEXTO ADICIONAL: ${form.extra_context || 'Não informado'}
         </div>
       )}
 
-      {/* Etapa 2 — Público e produto */}
+      {/* Etapa 2 */}
       {step === 2 && (
         <div className="space-y-4 animate-fade-in">
           <div>
-            <p className="font-display font-bold text-lg text-surface-900 mb-1">Público e produto</p>
-            <p className="text-sm text-surface-500">Quem é o cliente ideal e o que a marca oferece?</p>
+            <p className="font-display font-extrabold text-lg text-surface-900 mb-1">Público e produto</p>
+            <p className="text-sm text-surface-400">Quem é o cliente ideal e o que a marca oferece?</p>
           </div>
 
           <div>
             <label className="label">Público-alvo *</label>
             <textarea
               className="input min-h-[100px] resize-none"
-              placeholder="Ex: Mulheres de 25 a 40 anos, classe média-alta, que buscam cuidados com a pele e bem-estar..."
+              placeholder="Ex: Mulheres de 25 a 40 anos, classe média-alta, que buscam cuidados com a pele..."
               value={form.target_audience}
               onChange={update('target_audience')}
             />
@@ -185,32 +194,40 @@ CONTEXTO ADICIONAL: ${form.extra_context || 'Não informado'}
           </div>
 
           <div>
-            <label className="label">Objetivos nas redes sociais <span className="text-surface-400 font-normal">(opcional)</span></label>
-            <input className="input" placeholder="Ex: Aumentar agendamentos, vender online, construir autoridade..." value={form.objectives} onChange={update('objectives')} />
+            <label className="label">
+              Objetivos nas redes <span className="text-surface-300 font-normal normal-case tracking-normal">(opcional)</span>
+            </label>
+            <input className="input" placeholder="Ex: Aumentar agendamentos, construir autoridade..." value={form.objectives} onChange={update('objectives')} />
           </div>
         </div>
       )}
 
-      {/* Etapa 3 — Referências e contexto */}
+      {/* Etapa 3 */}
       {step === 3 && (
         <div className="space-y-4 animate-fade-in">
           <div>
-            <p className="font-display font-bold text-lg text-surface-900 mb-1">Referências e estilo</p>
-            <p className="text-sm text-surface-500">O que inspira a marca e o que deve ser evitado?</p>
+            <p className="font-display font-extrabold text-lg text-surface-900 mb-1">Referências e estilo</p>
+            <p className="text-sm text-surface-400">O que inspira a marca e o que deve ser evitado?</p>
           </div>
 
           <div>
-            <label className="label">Marcas referência <span className="text-surface-400 font-normal">(opcional)</span></label>
+            <label className="label">
+              Marcas referência <span className="text-surface-300 font-normal normal-case tracking-normal">(opcional)</span>
+            </label>
             <input className="input" placeholder="Ex: O Boticário, Granado, Sallve..." value={form.reference_brands} onChange={update('reference_brands')} />
           </div>
 
           <div>
-            <label className="label">O que NÃO quer ver no perfil <span className="text-surface-400 font-normal">(opcional)</span></label>
-            <input className="input" placeholder="Ex: Tom agressivo, promoções excessivas, posts muito formais..." value={form.avoid} onChange={update('avoid')} />
+            <label className="label">
+              O que NÃO quer ver <span className="text-surface-300 font-normal normal-case tracking-normal">(opcional)</span>
+            </label>
+            <input className="input" placeholder="Ex: Tom agressivo, promoções excessivas..." value={form.avoid} onChange={update('avoid')} />
           </div>
 
           <div>
-            <label className="label">Contexto adicional <span className="text-surface-400 font-normal">(opcional)</span></label>
+            <label className="label">
+              Contexto adicional <span className="text-surface-300 font-normal normal-case tracking-normal">(opcional)</span>
+            </label>
             <textarea
               className="input min-h-[100px] resize-none"
               placeholder="Qualquer informação relevante que ajude a IA a entender melhor a marca..."
@@ -219,14 +236,24 @@ CONTEXTO ADICIONAL: ${form.extra_context || 'Não informado'}
             />
           </div>
 
-          {/* Preview do que vai acontecer */}
-          <div className="bg-brand-50 border border-brand-200 rounded-2xl p-4">
-            <div className="flex items-start gap-3">
-              <Sparkles className="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-semibold text-brand-800">A IA vai gerar automaticamente</p>
-                <p className="text-xs text-brand-600 mt-1">Persona detalhada · Pilares de conteúdo · Tom de voz · Oportunidades de conteúdo</p>
-              </div>
+          {/* AI info box */}
+          <div
+            className="rounded-2xl p-4 flex items-start gap-3"
+            style={{ background: '#fff7ed', border: '1.5px solid #fed7aa' }}
+          >
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+              style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}
+            >
+              <Sparkles className="w-4 h-4 text-white" />
+            </div>
+            <div>
+              <p className="text-sm font-display font-bold" style={{ color: '#92400e' }}>
+                A IA vai gerar automaticamente
+              </p>
+              <p className="text-xs mt-1" style={{ color: '#b45309' }}>
+                Persona detalhada · Pilares de conteúdo · Tom de voz · Oportunidades
+              </p>
             </div>
           </div>
         </div>
