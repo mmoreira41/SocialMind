@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SocialMind — Design Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f5f5f0;
+    min-height: 100vh;
+    padding: 32px 20px;
+    color: #1c1917;
+  }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    color: #1c1917;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #78716c;
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  .screens-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .screen-label {
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #a8a29e;
+  }
+
+  /* Phone frame */
+  .phone {
+    width: 300px;
+    background: #1c1917;
+    border-radius: 36px;
+    padding: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.1);
+  }
+
+  .phone-screen {
+    background: #fafaf8;
+    border-radius: 26px;
+    overflow: hidden;
+    min-height: 580px;
+  }
+
+  /* ── LOGIN ─────────────────────────────── */
+  .login-screen {
+    background: linear-gradient(160deg, #1c1917 0%, #292524 55%, #3c1a0a 100%);
+    min-height: 580px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    gap: 0;
+  }
+
+  .login-logo {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(245,158,11,0.4);
+  }
+
+  .login-logo svg { width: 28px; height: 28px; fill: white; }
+
+  .login-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fef3c7;
+    margin-bottom: 4px;
+  }
+
+  .login-sub {
+    font-size: 12px;
+    color: rgba(254,243,199,0.5);
+    margin-bottom: 32px;
+  }
+
+  .login-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  .login-field {
+    margin-bottom: 12px;
+  }
+
+  .login-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #57534e;
+    margin-bottom: 4px;
+  }
+
+  .login-input {
+    width: 100%;
+    height: 42px;
+    background: #fafaf8;
+    border: 1.5px solid #e7e5e4;
+    border-radius: 10px;
+    padding: 0 12px;
+    font-size: 13px;
+    color: #1c1917;
+    display: flex;
+    align-items: center;
+  }
+
+  .login-input.placeholder { color: #a8a29e; }
+
+  .login-btn {
+    width: 100%;
+    height: 44px;
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    margin-top: 4px;
+    box-shadow: 0 4px 12px rgba(245,158,11,0.4);
+  }
+
+  /* ── DASHBOARD ─────────────────────────── */
+  .dash-screen {
+    padding: 20px 16px 80px;
+    min-height: 580px;
+    position: relative;
+  }
+
+  .dash-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .dash-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .brand-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-icon svg { width: 14px; height: 14px; fill: white; }
+
+  .brand-name {
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: #1c1917;
+  }
+
+  .dash-greeting {
+    font-size: 11px;
+    color: #a8a29e;
+  }
+
+  /* Stats */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid #f0ede8;
+  }
+
+  .stat-card.cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .stat-number {
+    font-family: 'Sora', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #ea580c;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: #a8a29e;
+    margin-top: 3px;
+  }
+
+  .cta-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #fef3c7, #fed7aa);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cta-icon svg { width: 18px; height: 18px; fill: #ea580c; }
+
+  .cta-text .cta-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1c1917;
+  }
+
+  .cta-text .cta-sub {
+    font-size: 10px;
+    color: #a8a29e;
+  }
+
+  /* Section */
+  .section-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #a8a29e;
+    margin-bottom: 8px;
+  }
+
+  /* Action cards */
+  .action-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+
+  .action-card {
+    background: white;
+    border-radius: 14px;
+    padding: 12px 14px;
+    border: 1px solid #f0ede8;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .action-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .action-icon svg { width: 18px; height: 18px; }
+
+  .action-icon.amber { background: #fff7ed; }
+  .action-icon.amber svg { fill: #ea580c; }
+  .action-icon.green { background: #f0fdf4; }
+  .action-icon.green svg { fill: #16a34a; }
+
+  .action-info { flex: 1; min-width: 0; }
+
+  .action-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1c1917;
+  }
+
+  .action-sub { font-size: 10px; color: #a8a29e; margin-top: 1px; }
+
+  .chevron { color: #d4cdc8; font-size: 12px; }
+
+  /* Client items */
+  .client-list { display: flex; flex-direction: column; gap: 6px; }
+
+  .client-card {
+    background: white;
+    border-radius: 14px;
+    padding: 10px 14px;
+    border: 1px solid #f0ede8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .client-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: white;
+  }
+
+  .client-info { flex: 1; min-width: 0; }
+
+  .client-name {
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1c1917;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .client-niche { font-size: 10px; color: #a8a29e; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #f0ede8;
+    border-radius: 0 0 26px 26px;
+    padding: 10px 16px 14px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .nav-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-icon svg { width: 18px; height: 18px; }
+
+  .nav-label { font-size: 9px; font-weight: 500; }
+
+  .nav-item.active .nav-icon svg { fill: #ea580c; }
+  .nav-item.active .nav-label { color: #ea580c; font-weight: 700; }
+  .nav-item.inactive .nav-icon svg { fill: #d4cdc8; }
+  .nav-item.inactive .nav-label { color: #d4cdc8; }
+
+  /* ── CLIENTE ────────────────────────────── */
+  .client-screen {
+    padding: 20px 16px 80px;
+    min-height: 580px;
+    position: relative;
+  }
+
+  .back-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .back-btn {
+    width: 36px;
+    height: 36px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #f0ede8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .back-btn svg { width: 16px; height: 16px; fill: #78716c; }
+
+  .page-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #1c1917;
+  }
+
+  .page-sub { font-size: 11px; color: #a8a29e; }
+
+  .client-hero {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #f0ede8;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .client-hero-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Sora', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+  }
+
+  .hero-name {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1c1917;
+  }
+
+  .hero-niche { font-size: 11px; color: #a8a29e; margin-top: 2px; }
+
+  .hero-ig {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .ig-dot { width: 6px; height: 6px; background: #ea580c; border-radius: 50%; }
+
+  .hero-ig span { font-size: 10px; color: #ea580c; font-weight: 600; }
+
+  /* Feature cards */
+  .feature-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+
+  .feature-card {
+    background: white;
+    border-radius: 14px;
+    padding: 11px 14px;
+    border: 1px solid #f0ede8;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .feature-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .feature-icon svg { width: 18px; height: 18px; }
+  .feature-icon.orange { background: #fff7ed; }
+  .feature-icon.orange svg { fill: #ea580c; }
+  .feature-icon.green { background: #f0fdf4; }
+  .feature-icon.green svg { fill: #16a34a; }
+  .feature-icon.purple { background: #faf5ff; }
+  .feature-icon.purple svg { fill: #9333ea; }
+
+  .feature-info { flex: 1; }
+  .feature-title { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; color: #1c1917; }
+  .feature-sub { font-size: 10px; color: #a8a29e; margin-top: 1px; }
+
+  /* Positioning card */
+  .position-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .position-dot { width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; }
+
+  .position-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #a8a29e;
+  }
+
+  .pos-card {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #f0ede8;
+    padding: 12px 14px;
+    margin-bottom: 6px;
+  }
+
+  .pos-card-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #57534e;
+    margin-bottom: 6px;
+  }
+
+  .pos-text { font-size: 10px; color: #78716c; line-height: 1.5; }
+
+  .pain-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+
+  .pain-tag {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 9px;
+    color: #ea580c;
+    font-weight: 600;
+  }
+
+  .pillar-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+
+  .pillar-num {
+    width: 18px;
+    height: 18px;
+    background: #fff7ed;
+    border-radius: 6px;
+    border: 1px solid #fed7aa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 800;
+    color: #ea580c;
+    flex-shrink: 0;
+  }
+
+  .pillar-text .ptitle { font-size: 10px; font-weight: 700; color: #1c1917; }
+  .pillar-text .pdesc { font-size: 9px; color: #a8a29e; }
+
+  /* ── FORM ───────────────────────────────── */
+  .form-screen {
+    padding: 20px 16px 80px;
+    min-height: 580px;
+    position: relative;
+    background: #fafaf8;
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .prog-step {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .prog-step.done { background: linear-gradient(135deg, #f59e0b, #ea580c); color: white; }
+  .prog-step.active { background: linear-gradient(135deg, #f59e0b, #ea580c); color: white; box-shadow: 0 0 0 4px #fed7aa; }
+  .prog-step.todo { background: #f0ede8; color: #a8a29e; }
+
+  .prog-line { flex: 1; height: 2px; border-radius: 2px; }
+  .prog-line.done { background: #f59e0b; }
+  .prog-line.todo { background: #f0ede8; }
+
+  .form-heading {
+    font-family: 'Sora', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #1c1917;
+    margin-bottom: 4px;
+  }
+
+  .form-sub { font-size: 12px; color: #a8a29e; margin-bottom: 20px; }
+
+  .form-field { margin-bottom: 14px; }
+
+  .form-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #57534e;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .form-input {
+    width: 100%;
+    height: 44px;
+    background: white;
+    border: 1.5px solid #e7e5e4;
+    border-radius: 11px;
+    padding: 0 12px;
+    font-size: 12px;
+    color: #1c1917;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-input.placeholder-text { color: #a8a29e; }
+  .form-input.filled { border-color: #fed7aa; color: #1c1917; }
+
+  .ai-info {
+    background: #fff7ed;
+    border: 1.5px solid #fed7aa;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .ai-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .ai-title { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; color: #92400e; margin-bottom: 2px; }
+  .ai-desc { font-size: 10px; color: #b45309; }
+
+  .nav-row {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+
+  .btn-back {
+    height: 44px;
+    padding: 0 16px;
+    background: white;
+    border: 1.5px solid #e7e5e4;
+    border-radius: 12px;
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #57534e;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .btn-next {
+    flex: 1;
+    height: 44px;
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    border-radius: 12px;
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(245,158,11,0.35);
+  }
+
+  /* Select overlay */
+  .select-bar {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1c1917;
+    color: white;
+    border-radius: 24px;
+    padding: 14px 28px;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+    transition: transform 0.2s;
+    white-space: nowrap;
+  }
+
+  .select-bar:hover { transform: translateX(-50%) scale(1.03); }
+  .select-bar span.dot { width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; display: inline-block; }
+</style>
+</head>
+<body>
+
+<h1>Design completo — SocialMind</h1>
+<p class="subtitle">4 telas redesenhadas com paleta Âmbar Clean. Confira cada detalhe antes de aprovar.</p>
+
+<div class="screens-grid">
+
+  <!-- TELA 1: LOGIN -->
+  <div class="screen-wrapper">
+    <span class="screen-label">01 — Login</span>
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="login-screen">
+          <div class="login-logo">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="login-title">SocialMind</div>
+          <div class="login-sub">Sua operação inteligente de social media</div>
+          <div class="login-card">
+            <div class="login-field">
+              <label>Email</label>
+              <div class="login-input placeholder">seu@email.com</div>
+            </div>
+            <div class="login-field">
+              <label>Senha</label>
+              <div class="login-input placeholder">••••••••</div>
+            </div>
+            <div class="login-btn">Entrar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA 2: DASHBOARD -->
+  <div class="screen-wrapper">
+    <span class="screen-label">02 — Dashboard</span>
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="dash-screen">
+          <!-- Top bar -->
+          <div class="dash-top">
+            <div class="dash-brand">
+              <div class="brand-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <span class="brand-name">SocialMind</span>
+            </div>
+            <span class="dash-greeting">Boa tarde!</span>
+          </div>
+
+          <!-- Stats -->
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-number">12</div>
+              <div class="stat-label">Clientes ativos</div>
+            </div>
+            <div class="stat-card cta">
+              <div class="cta-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              </div>
+              <div class="cta-text">
+                <div class="cta-title">Novo</div>
+                <div class="cta-sub">cliente</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-title">Ações rápidas</div>
+          <div class="action-list">
+            <div class="action-card">
+              <div class="action-icon amber">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="action-info">
+                <div class="action-title">Clientes</div>
+                <div class="action-sub">Gerenciar e criar conteúdo</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+            <div class="action-card">
+              <div class="action-icon green">
+                <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+              </div>
+              <div class="action-info">
+                <div class="action-title">Métricas</div>
+                <div class="action-sub">Relatório mensal com IA</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+
+          <div class="section-title">Recentes</div>
+          <div class="client-list">
+            <div class="client-card">
+              <div class="client-avatar" style="background:linear-gradient(135deg,#f59e0b,#ea580c);">S</div>
+              <div class="client-info">
+                <div class="client-name">Studio Bela Arte</div>
+                <div class="client-niche">Beleza & Estética</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+            <div class="client-card">
+              <div class="client-avatar" style="background:linear-gradient(135deg,#ea580c,#dc2626);">F</div>
+              <div class="client-info">
+                <div class="client-name">Fit & Flow Academia</div>
+                <div class="client-niche">Fitness & Saúde</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+
+          <!-- Bottom nav -->
+          <div class="bottom-nav">
+            <div class="nav-item active">
+              <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <span class="nav-label">Início</span>
+            </div>
+            <div class="nav-item inactive">
+              <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></div>
+              <span class="nav-label">Clientes</span>
+            </div>
+            <div class="nav-item inactive">
+              <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+              <span class="nav-label">Métricas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA 3: PERFIL DO CLIENTE -->
+  <div class="screen-wrapper">
+    <span class="screen-label">03 — Perfil do cliente</span>
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="client-screen">
+          <div class="back-header">
+            <div class="back-btn">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </div>
+            <div>
+              <div class="page-title">Studio Bela Arte</div>
+              <div class="page-sub">Beleza & Estética</div>
+            </div>
+          </div>
+
+          <div class="client-hero">
+            <div class="client-hero-avatar">S</div>
+            <div>
+              <div class="hero-name">Studio Bela Arte</div>
+              <div class="hero-niche">Beleza & Estética</div>
+              <div class="hero-ig">
+                <div class="ig-dot"></div>
+                <span>@studiobelaarte</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-list">
+            <div class="feature-card">
+              <div class="feature-icon orange">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Pauta mensal</div>
+                <div class="feature-sub">Gerar 28 ideias de posts</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon green">
+                <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Métricas</div>
+                <div class="feature-sub">Analisar resultados do mês</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon purple">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Respostas</div>
+                <div class="feature-sub">Sugestões para comentários</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+
+          <div class="position-header">
+            <div class="position-dot"></div>
+            <span class="position-title">Posicionamento</span>
+          </div>
+
+          <div class="pos-card">
+            <div class="pos-card-title">👤 Persona</div>
+            <div class="pos-text">Mulheres 28–42, classe B/C+, buscam autocuidado e bem-estar. Valorizam autenticidade.</div>
+            <div class="pain-tags">
+              <span class="pain-tag">Falta de tempo</span>
+              <span class="pain-tag">Autoestima</span>
+              <span class="pain-tag">Preço justo</span>
+            </div>
+          </div>
+
+          <div class="pos-card">
+            <div class="pos-card-title">🏛️ Pilares</div>
+            <div class="pillar-row">
+              <div class="pillar-num">1</div>
+              <div class="pillar-text">
+                <div class="ptitle">Transformação</div>
+                <div class="pdesc">Resultados reais, antes e depois</div>
+              </div>
+            </div>
+            <div class="pillar-row">
+              <div class="pillar-num">2</div>
+              <div class="pillar-text">
+                <div class="ptitle">Autoconhecimento</div>
+                <div class="pdesc">Cuidado como ato de amor próprio</div>
+              </div>
+            </div>
+            <div class="pillar-row">
+              <div class="pillar-num">3</div>
+              <div class="pillar-text">
+                <div class="ptitle">Educação</div>
+                <div class="pdesc">Dicas, tutoriais e informação</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bottom-nav">
+            <div class="nav-item inactive">
+              <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <span class="nav-label">Início</span>
+            </div>
+            <div class="nav-item active">
+              <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></div>
+              <span class="nav-label">Clientes</span>
+            </div>
+            <div class="nav-item inactive">
+              <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+              <span class="nav-label">Métricas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA 4: NOVO CLIENTE (passo 3) -->
+  <div class="screen-wrapper">
+    <span class="screen-label">04 — Cadastro (etapa 3/3)</span>
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="form-screen">
+          <div class="back-header" style="margin-bottom:16px;">
+            <div class="back-btn">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </div>
+            <div class="page-title" style="font-size:16px;">Novo Cliente</div>
+          </div>
+
+          <!-- Progress -->
+          <div class="progress-row">
+            <div class="prog-step done">✓</div>
+            <div class="prog-line done"></div>
+            <div class="prog-step done">✓</div>
+            <div class="prog-line done"></div>
+            <div class="prog-step active">3</div>
+          </div>
+
+          <div class="form-heading">Referências</div>
+          <div class="form-sub">O que inspira a marca?</div>
+
+          <div class="form-field">
+            <label class="form-label">Marcas referência</label>
+            <div class="form-input placeholder-text">Ex: O Boticário, Granado...</div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">O que NÃO quer no perfil</label>
+            <div class="form-input placeholder-text">Ex: tom agressivo, promoções...</div>
+          </div>
+
+          <div class="ai-info">
+            <span class="ai-icon">✦</span>
+            <div>
+              <div class="ai-title">A IA vai gerar automaticamente</div>
+              <div class="ai-desc">Persona · Pilares de conteúdo · Tom de voz · Oportunidades</div>
+            </div>
+          </div>
+
+          <div class="nav-row">
+            <div class="btn-back">‹ Voltar</div>
+            <div class="btn-next">✦ Cadastrar e gerar perfil</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA de aprovação -->
+<div style="text-align:center;margin-top:40px;padding-bottom:80px;">
+  <p style="font-size:14px;color:#78716c;margin-bottom:16px;">Esse é o design que será implementado. Tudo certo?</p>
+  <div style="display:flex;gap:12px;justify-content:center;">
+    <div onclick="recordApproval('sim')" style="background:linear-gradient(135deg,#f59e0b,#ea580c);color:white;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;padding:14px 32px;border-radius:14px;cursor:pointer;box-shadow:0 4px 16px rgba(245,158,11,0.4);transition:transform 0.15s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      ✓ Aprovar e implementar
+    </div>
+    <div onclick="recordApproval('ajuste')" style="background:white;color:#1c1917;font-family:'Sora',sans-serif;font-size:14px;font-weight:600;padding:14px 32px;border-radius:14px;cursor:pointer;border:1.5px solid #e7e5e4;transition:transform 0.15s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      Quero ajustar algo
+    </div>
+  </div>
+</div>
+
+<script>
+function recordApproval(choice) {
+  fetch('/event', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'click', choice, text: choice === 'sim' ? 'Aprovar e implementar' : 'Quero ajustar algo', timestamp: Date.now() })
+  });
+  const btn = event.target;
+  if (choice === 'sim') {
+    btn.textContent = '✓ Aprovado!';
+    btn.style.background = '#16a34a';
+  } else {
+    btn.textContent = 'Registrado!';
+  }
+}
+</script>
+</body>
+</html>

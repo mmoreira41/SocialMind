@@ -6,8 +6,8 @@ import { createClient } from '@/lib/supabase/server'
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 
 export const GEMINI_TEXT  = process.env.GEMINI_MODEL_TEXT  || 'gemini-2.5-pro'
-export const GEMINI_FAST  = process.env.GEMINI_MODEL_FAST  || 'gemini-2.0-flash'
-export const GEMINI_IMAGE = process.env.GEMINI_MODEL_IMAGE || 'gemini-2.0-flash-exp'
+export const GEMINI_FAST  = process.env.GEMINI_MODEL_FAST  || 'gemini-2.5-flash'
+export const GEMINI_IMAGE = process.env.GEMINI_MODEL_IMAGE || 'gemini-3.1-flash-image-preview'
 
 // ─── Contexto de cliente ──────────────────────────────────────
 export async function getClientContext(clientId: string): Promise<string> {

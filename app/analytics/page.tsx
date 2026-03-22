@@ -2,23 +2,49 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Header from '@/components/layout/Header'
-import { BarChart2 } from 'lucide-react'
+import AnalyticsView from '@/components/content/AnalyticsView'
 
-export default async function AnalyticsPage() {
+export default async function AnalyticsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ client?: string }>
+}) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
+  const params = await searchParams
+  const selectedClientId = params.client ?? null
+
+  // Busca todos os clientes para o seletor
+  const { data: clients } = await supabase
+    .from('clients')
+    .select('id, name, niche')
+    .eq('user_id', user.id)
+    .order('name')
+
+  // Se tem cliente selecionado, busca o snapshot mais recente
+  let initialSnapshot = null
+  if (selectedClientId) {
+    const { data } = await supabase
+      .from('analytics_snapshots')
+      .select('*')
+      .eq('client_id', selectedClientId)
+      .order('year', { ascending: false })
+      .order('month', { ascending: false })
+      .limit(1)
+      .single()
+    initialSnapshot = data ?? null
+  }
+
   return (
     <div className="page-container">
       <Header title="Métricas" />
-      <div className="text-center py-16">
-        <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-          <BarChart2 className="w-8 h-8 text-emerald-400" />
-        </div>
-        <p className="font-semibold text-surface-900 mb-1">Em breve</p>
-        <p className="text-sm text-surface-500">Análise de métricas com IA — Semana 3</p>
-      </div>
+      <AnalyticsView
+        clients={clients ?? []}
+        selectedClientId={selectedClientId}
+        initialSnapshot={initialSnapshot}
+      />
     </div>
   )
 }
